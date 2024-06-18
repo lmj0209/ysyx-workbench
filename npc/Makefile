@@ -27,15 +27,15 @@ waveform.vcd: ./obj_dir/V$(MODULE)
 	@echo "### BUILDING SIM ###"
 	make -C obj_dir -f V$(MODULE).mk V$(MODULE)
 
-.stamp.verilate: $(svpath)/$(MODULE).sv  $(tb_c_path)/tb_$(MODULE).cpp
+.stamp.verilate: $(svpath)/$(MODULE).v  $(tb_c_path)/tb_$(MODULE).cpp
 	@echo
 	@echo "### VERILATING ###"
-	verilator -Wall --trace -cc $(svpath)/$(MODULE).sv --exe $(tb_c_path)/tb_$(MODULE).cpp
+	verilator -Wall --trace -cc $(svpath)/$(MODULE).v --exe $(tb_c_path)/tb_$(MODULE).cpp
 	@touch .stamp.verilate
 
 .PHONY:lint
-lint: $(svpath)/$(MODULE).sv .sv
-	verilator --lint-only $(svpath)/$(MODULE).sv .sv
+lint: $(svpath)/$(MODULE).v .v
+	verilator --lint-only $(svpath)/$(MODULE).v .v
 
 all:
 	@echo "Write this Makefile by your self."
